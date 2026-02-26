@@ -11,8 +11,7 @@ public abstract class Allotjament implements InAllotjament{
     public Allotjament(String nom, String id, long estadaMinimaAlta, long estadaMinimaBaixa){
         this.nom = nom;
         this.id = id;
-        this.estadaMinimaAlta = estadaMinimaAlta;
-        this.estadaMinimaBaixa = estadaMinimaBaixa;
+        setEstadaMinima(estadaMinimaAlta, estadaMinimaBaixa);
     }
 
     // Retorna el nom
