@@ -10,7 +10,7 @@ public class MobilHome extends Casa {
     // Mètode que retorna si hi ha terrasa + barbacoa o no
     public boolean isTerrasaBarbacoa() { return this.terrasaBarbacoa; }
     // Assigna el valor del paràmetre a terrasaBarbacoa
-    public void setTerrasaBarbacoa(boolean TerrasaBarbacoa) {
+    public void setTerrasaBarbacoa(boolean terrasaBarbacoa) {
         this.terrasaBarbacoa = terrasaBarbacoa;
     }
 
