@@ -2,7 +2,7 @@ package prog2.model;
 
 public class Client implements InClient{
 
-    // Nom i DNI del client
+    // Atributs, Nom i DNI del client
     private String nom;
     private String dni;
 

@@ -5,10 +5,13 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
+// Classe que gestiona una llista de reserves del càmping.
 public class LlistaReserves implements InLlistaReserves{
+
 
     private ArrayList<Reserva> reserves;
 
+    // Constructor de la classe LlistaReserves
     public LlistaReserves(){
         this.reserves = new ArrayList<>();
     }
@@ -50,18 +53,21 @@ public class LlistaReserves implements InLlistaReserves{
     }
 
     @Override
+    // Afegeix una nova reserva a la llista.
     public void afegirReserva(Allotjament allotjament, Client client, LocalDate dataEntrada, LocalDate dataSortida) throws ExcepcioReserva{
+        // Validació 1: Estada mínima
         if(!isEstadaMinima(allotjament, dataEntrada, dataSortida)){
             throw new ExcepcioReserva("Les dates sol·licitades pel client " + client.getNom() + " amb DNI: " + client.getDni() +
                     " no compleixen l'estada mínima per l'allotjament amb identificador " + allotjament.getId() + ".");
         }
 
+        // Validació 2: Disponibilitat de l'allotjament
         if(!allotjamentDisponible(allotjament, dataEntrada, dataSortida)){
             throw new ExcepcioReserva("L'allotjament amb identificador " + allotjament.getId() +
                             " no està disponible en la data demanada " + dataEntrada +
                             " pel client " + client.getNom() + " amb DNI: " + client.getDni() + ".");
         }
-        // Crear i afegir la reserva
+        // Si totes les validacions són correctes, creem i afegim la reserva
         Reserva novaReserva = new Reserva(allotjament, client, dataEntrada, dataSortida);
         this.reserves.add(novaReserva);
     }
