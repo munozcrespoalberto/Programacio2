@@ -3,14 +3,14 @@ package prog2.model;
 public class Bungalow extends Casa{
     private int placesParquing;
     private boolean terrassa;
-    private boolean televisio;
+    private boolean tv;
     private boolean aireFred;
 
-    public Bungalow(int placesParquing, boolean terrassa, boolean televisio, boolean aireFred, String mida, int numHabitacions, int Persones, String nom, String id, long estadaMinimaAlta, long estadaMinimaBaixa){
-        super(mida, numHabitacions, Persones, nom, id, 7, 4);
+    public Bungalow(String nom, String id, String mida, int habitacions, int placesPersones, int placesParquing, boolean terrassa, boolean tv, boolean aireFred, long estadaMinimaAlta, long estadaMinimaBaixa) {
+        super(nom, id, estadaMinimaAlta, estadaMinimaBaixa, mida, habitacions, placesPersones);
         this.placesParquing = placesParquing;
         this.terrassa = terrassa;
-        this.televisio = televisio;
+        this.tv = tv;
         this.aireFred = aireFred;
     }
     // Mètode que retorna les places de parquing
@@ -23,10 +23,10 @@ public class Bungalow extends Casa{
     public boolean isTerrassa() { return this.terrassa; }
     // Assigna el valor del paràmetre a terrassa
     public void setTerrassa(boolean terrassa) { this.terrassa = terrassa; }
-    // Mètode que retorna si hi ha televisio o no
-    public boolean isTelevisio() { return this.televisio; }
-    // Assigna el valor del paràmetre a televisio
-    public void setTelevisio(boolean televisio) { this.televisio = televisio; }
+    // Mètode que retorna si hi ha tv o no
+    public boolean isTv() { return this.tv; }
+    // Assigna el valor del paràmetre a tv
+    public void setTv(boolean tv) { this.tv = tv; }
     // Mètode que retorna si hi ha aire fred o no
     public boolean isAireFred() { return this.aireFred; }
     // Assigna el valor del paràmetre a aireFred
@@ -48,7 +48,7 @@ public class Bungalow extends Casa{
         return infoBase + " Bungalow{" +
                 "placesParquing=" + this.placesParquing +
                 ", terrassa=" + this.terrassa +
-                ", televisio=" + this.televisio +
+                ", tv=" + this.tv +
                 ", aireFred=" + this.aireFred +
                 "}";
     }

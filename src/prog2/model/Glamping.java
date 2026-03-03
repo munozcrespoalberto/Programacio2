@@ -1,17 +1,17 @@
 package prog2.model;
 
 public class Glamping extends Casa {
-    private String materialGlamping;
+    private String material;
     private boolean casaMascota;
-    public Glamping(String materialGlamping, boolean casaMascota, String mida, int numHabitacions, int Persones, String nom, String id, long estadaMinimaAlta, long estadaMinimaBaixa) {
-        super(mida, numHabitacions, Persones, nom, id, estadaMinimaAlta, estadaMinimaBaixa);
-        this.materialGlamping = materialGlamping;
+    public Glamping(String nom, String id, String mida, int habitacions, int placesPersones, String material, boolean casaMascota, long estadaMinimaAlta, long estadaMinimaBaixa) {
+        super(nom, id, estadaMinimaAlta, estadaMinimaBaixa, mida, habitacions, placesPersones);
+        this.material = material;
         this.casaMascota = casaMascota;
     }
     // Mètode que retorna el material del Glamping
-    public String getMaterialGlamping() { return materialGlamping; }
-    // Assigna el valor del paràmetre a materialGlamping
-    public void setMaterialGlamping(String materialGlamping) { this.materialGlamping = materialGlamping; }
+    public String getMaterial() { return material; }
+    // Assigna el valor del paràmetre a material
+    public void setMaterial(String material) { this.material = material; }
 
     // Mètode que retorna si hi ha o no una casa per mascotes
     public boolean isCasaMascota() { return this.casaMascota; }
@@ -31,7 +31,7 @@ public class Glamping extends Casa {
         String infoBase = super.toString();
 
         // Añadimos la información específica de Glamping
-        return infoBase + " Glamping{material=" + materialGlamping +
+        return infoBase + " Glamping{material=" + material +
                 ", casaMascota=" + casaMascota + "}";
     }
 }

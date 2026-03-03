@@ -1,23 +1,23 @@
 package prog2.model;
 
 public class MobilHome extends Casa {
-    private boolean terrasaBarbacoa;
+    private boolean terrassaBarbacoa;
     // Aquí irán los atributos y métodos
-    public MobilHome(boolean terrasaBarbacoa, String mida, int numHabitacions, int Persones, String nom, String id, long estadaMinimaAlta, long estadaMinimaBaixa) {
-        super(mida, numHabitacions, Persones, nom, id, estadaMinimaAlta, estadaMinimaBaixa);
-        this.terrasaBarbacoa = terrasaBarbacoa;
+    public MobilHome(String nom, String id, String mida, int habitacions, int placesPersones, boolean terrassaBarbacoa, long estadaMinimaAlta, long estadaMinimaBaixa) {
+        super(nom, id, estadaMinimaAlta, estadaMinimaBaixa, mida, habitacions, placesPersones);
+        this.terrassaBarbacoa = terrassaBarbacoa;
     }
     // Mètode que retorna si hi ha terrasa + barbacoa o no
-    public boolean isTerrasaBarbacoa() { return this.terrasaBarbacoa; }
-    // Assigna el valor del paràmetre a terrasaBarbacoa
-    public void setTerrasaBarbacoa(boolean terrasaBarbacoa) {
-        this.terrasaBarbacoa = terrasaBarbacoa;
+    public boolean isTerrassaBarbacoa() { return this.terrassaBarbacoa; }
+    // Assigna el valor del paràmetre a terrassaBarbacoa
+    public void setTerrassaBarbacoa(boolean terrassaBarbacoa) {
+        this.terrassaBarbacoa = terrassaBarbacoa;
     }
 
     //Comprova el funcionament (si te terrasa + barbacoa funciona)
     @Override
     public boolean correcteFuncionament(){
-        return this.terrasaBarbacoa;
+        return this.terrassaBarbacoa;
     }
 
     @Override
@@ -26,6 +26,6 @@ public class MobilHome extends Casa {
         String infoBase = super.toString();
 
         // Añadimos la información específica de MobilHome
-        return infoBase + " MobilHome{terrassaBarbacoa=" + terrasaBarbacoa + "}";
+        return infoBase + " MobilHome{terrassaBarbacoa=" + terrassaBarbacoa + "}";
     }
 }

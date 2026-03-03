@@ -5,11 +5,11 @@ public abstract class Casa extends Allotjament {
     private int numHabitacions;
     private int persones;
     // Aquí irán los atributos y métodos
-    public Casa(String mida, int numHabitacions, int Persones, String nom, String id, long estadaMinimaAlta, long estadaMinimaBaixa) {
+    public Casa(String nom, String id, long estadaMinimaAlta, long estadaMinimaBaixa, String mida, int numHabitacions, int persones) {
         super(nom, id, estadaMinimaAlta, estadaMinimaBaixa);
         this.mida = mida;
         this.numHabitacions = numHabitacions;
-        this.persones = Persones;
+        this.persones = persones;
     }
     // Mètode que retorna la mida
     public String getMida(){
