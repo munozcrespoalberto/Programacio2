@@ -4,6 +4,7 @@ import prog2.vista.ExcepcioReserva;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 // Classe que gestiona una llista de reserves del càmping.
 public class LlistaReserves implements InLlistaReserves{
@@ -24,19 +25,18 @@ public class LlistaReserves implements InLlistaReserves{
 
     // Diu si esta disponible o si no ho esta
     private boolean allotjamentDisponible(Allotjament allotjament, LocalDate dataEntrada, LocalDate dataSortida){
-        for(Reserva r : this.reserves){
-            // Ens interesen les reserves del mateix allotjament
-            if(r.getAllotjament_().equals(allotjament)){
+        Iterator<Reserva> it = this.reserves.iterator();
+        while (it.hasNext()) {
+            Reserva r = it.next();
+            if (r.getAllotjament_().equals(allotjament)) {
                 LocalDate entradaExist = r.getDataEntrada();
                 LocalDate sortidaExist = r.getDataSortida();
-
-                // Retorna fals si les dates es creuen
-                if(dataEntrada.isBefore(sortidaExist) && dataSortida.isAfter(entradaExist)){
-                    return false;
+                if (dataEntrada.isBefore(sortidaExist) && dataSortida.isAfter(entradaExist)) {
+                    return false; // No disponible
                 }
             }
         }
-        // En cas contrari retorna true
+        // Disponible
         return true;
     }
 

@@ -2,6 +2,8 @@ package prog2.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
+
 import prog2.vista.ExcepcioReserva;
 
 
@@ -79,24 +81,28 @@ public class Camping implements InCamping{
 
     //Metode privat creat per no haver de posar tot a afegirReserva. Busca un allotjament associat amb un id concret
     private Allotjament buscarAllotjament(String id_) {
-        for (Allotjament a : allotjaments) {
-            if (a.getId().equals(id_)) { //Si el id que busquem es el mateix que el del allotjament que estem mirant, l'hem trobat
+        Iterator<Allotjament> it = allotjaments.iterator();
+        while (it.hasNext()) { //Mentre quedin elements
+            Allotjament a = it.next(); //Seguent element
+            if (a.getId().equals(id_)) {
                 return a;
             }
         }
-        //Retornem null si no trobem l'ajotllament amb l'id indicat
         return null;
     }
 
     //El mateix que el metode de buscarAllotjament pero amb Clients i el seu DNI
     private Client buscarClient(String dni_) {
-        for (Client a : clients) {
-            if(a.getDni().equals(dni_)) {
-                return a;
+        Iterator<Client> it = clients.iterator(); //Iterador de la llista de clients
+        while (it.hasNext()) {
+            Client client = it.next(); //Anem client en client
+            if (client.getDni().equals(dni_)) {
+                return client; // Si trobem un client amb aquest dni
             }
         }
         return null;
     }
+
     //Afegeix una nova reserva al càmping
     public void afegirReserva(String id_, String dni_, LocalDate dataEntrada, LocalDate dataSortida) throws ExcepcioReserva{
         Allotjament allotjament = buscarAllotjament(id_);
@@ -113,12 +119,14 @@ public class Camping implements InCamping{
     //Recorre la llista de serveis comprovant el correcte funcionament de cadascun d'ells per contar el número de serveis que estan operatius
     public int calculAllotjamentsOperatius() {
         int operatius = 0;
-        for (Allotjament a : this.allotjaments) { //Per cada iteracio, l'element de la llista numero(iteracio), s'asigna a "a" com a objecte de tipus Allotjament
+        Iterator<Allotjament> it = this.allotjaments.iterator();
+        while (it.hasNext()) {
+            Allotjament a = it.next();
             if (a.correcteFuncionament()) {
                 operatius++;
             }
         }
-        return operatius; //Numero de allotjaments operatius
+        return operatius; //Nombre d'allotjaments operatius
     }
 
     //Cerca i retorna l'allotjament amb estada mínima de la temporada alta més curta
@@ -126,11 +134,13 @@ public class Camping implements InCamping{
         if(allotjaments.isEmpty()) {
             return null;
         }
-        Allotjament mesCurta = allotjaments.get(0); //Agafo el primer element d'allotjaments
-        long minEstada = mesCurta.getEstadaMinima(temp); //Agafem l'estada minima del primer element, a partir d'aquesta farem el bucle
-        for (Allotjament a : allotjaments) {
-            long estada = a.getEstadaMinima(temp); //La estada mes curta del nou element en temporada alta
-            if (estada < minEstada) { //En cas de que la del nou element sigui mes curta que la de l'anterior, es substitueixen minEstada i mesCurta per les dades d'aquest nou allotjament
+        Iterator<Allotjament> it = allotjaments.iterator();
+        Allotjament mesCurta = it.next(); //Primer element
+        long minEstada = mesCurta.getEstadaMinima(temp);
+        while (it.hasNext()) {
+            Allotjament a = it.next();
+            long estada = a.getEstadaMinima(temp);
+            if (estada < minEstada) {
                 minEstada = estada;
                 mesCurta = a;
             }
