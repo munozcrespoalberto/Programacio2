@@ -1,142 +1,90 @@
-
 package prog2.model;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-
-import prog2.vista.ExcepcioReserva;
+import prog2.vista.ExcepcioCamping;
 
 /**
- * Interfície per definir la forma del Càmping
- * @author lauraigual
+ * Interfície que defineix les operacions bàsiques per gestionar un càmping.
  */
 public interface InCamping {
 
     /**
      * Retorna el nom del càmping.
-     * @return el nom del càmping.
+     * @return String
      */
-    String getNom();
+    String getNomCamping();
 
     /**
-     * Retorna la llista de reserves del camping.
-     * @return
+     * Llista els allotjaments segons el seu estat.
+     * @param estat Estat dels allotjaments a llistar. (Operatiu, No Operatiu)
+     * @return String
+     * @throws ExcepcioCamping
      */
-    LlistaReserves getLlistaReserves();
+    String llistarAllotjaments(String estat) throws ExcepcioCamping;
 
     /**
-     * Retorna la llista d'allotjaments del camping.
+     * Llista els accessos segons l'estat indicat.
+     * @param infoEstat Estat dels accessos a llistar. (Obert, Tancat)
+     * @return String
+     * @throws ExcepcioCamping
      */
-    ArrayList<Allotjament> getLlistaAllotjaments();
+    String llistarAccessos(String infoEstat) throws ExcepcioCamping;
 
     /**
-     * Retorna la llista de clients del camping.
-     * @return
+     * Llista les tasques registrades al càmping.
+     * @return String
+     * @throws ExcepcioCamping
      */
-    ArrayList<Client> getLlistaClients();
+    String llistarTasquesManteniment() throws ExcepcioCamping;
 
     /**
-     * Retorna el número total d'allotjaments del càmping.
-     * @return el número total d'allotjaments.
+     * Afegeix una nova tasca al registre del càmping.
+     * @param num Número identificador de la tasca.
+     * @param tipus Tipus de tasca (en format string)
+     * @param idAllotjament Identificador de l'allotjament afectat.
+     * @param data Data en què s'ha registrat la tasca.
+     * @param dies Número esperat de dies per completar la tasca
+     * @throws ExcepcioCamping
      */
-    int getNumAllotjaments();
+    void afegirTascaManteniment(int num, String tipus, String idAllotjament, String data, int dies) throws ExcepcioCamping;
 
     /**
-     * Retorna el número total de reserves del càmping.
-     * @return el número total de reserves.
+     * Completa una tasca de manteniment existent identificada pel seu número.
+     * @param num Número identificador de la tasca a completar.
+     * @throws ExcepcioCamping
      */
-    int getNumReserves();
+    void completarTascaManteniment(int num) throws ExcepcioCamping;
 
     /**
-     * Retorna el número total de clients del càmping.
-     * @return el número total de clients.
+     * Calcula el nombre d'accessos no accessibles al càmping.
+     * @return El nombre d'accessos accessibles. (int)
      */
-    int getNumClients();
+    int calculaAccessosNoAccessibles();
 
     /**
-     * Crea un nou objecte de tipus Client i l'afegeix a la llista de clients.
-     * @param nom_ el nom del nou client.
-     * @param dni_ el DNI del nou client.
+     * Calcula la quantitat total de metres dels accessos de terra.
+     * @return La quantitat de metres. (float)
      */
-    void afegirClient(String nom_, String dni_);
-
+    float calculaMetresTerra();
 
     /**
-     * Afegeix una nova parcel·la a la llista d'allotjaments.
-     * @param nom_ el nom de la parcela.
-     * @param idAllotjament_ l'identificador únic de l'allotjament.
-     * @param metres la mida de la parcela.
-     * @param connexioElectrica true si disposa de connexió elèctrica, false altrament.
+     * Guarda l'estat actual del càmping en un fitxer.
+     * @param camiDesti Ruta del fitxer de destinació.
+     * @throws ExcepcioCamping
      */
-    void afegirParcela(String nom_, String idAllotjament_, float metres, boolean connexioElectrica);
+    void save(String camiDesti) throws ExcepcioCamping;
 
     /**
-     * Afegeix un nou bungalow a la llista d'allotjaments.
-     * @param nom_ el nom del bungalow.
-     * @param idAllotjament_ l'identificador únic de l'allotjament.
-     * @param mida la mida del bungalow.
-     * @param habitacions el nombre d'habitacions del bungalow.
-     * @param placesPersones el nombre màxim de places per a persones.
-     * @param placesParquing el nombre de places de pàrquing disponibles.
-     * @param terrassa true si disposa de terrassa, false altrament.
-     * @param tv true si disposa de televisió, false altrament.
-     * @param aireFred true si disposa d'aire condicionat, false altrament.
+     * Carrega l'estat d'un càmping des d'un fitxer.
+     * @param camiOrigen Ruta del fitxer d'origen.
+     * @return Una instància de la classe Camping carregada des del fitxer.
+     * @throws ExcepcioCamping
      */
-    void afegirBungalow(String nom_, String idAllotjament_, String mida, int habitacions, int placesPersones,
-                        int placesParquing, boolean terrassa, boolean tv, boolean aireFred);
+    static Camping load(String camiOrigen) throws ExcepcioCamping {
+        throw new UnsupportedOperationException("Aquest mètode està implementat a la classe Camping");
+    }
 
     /**
-     * Afegeix un bungalow premium a la llista d'allotjaments.
-     * @param serveisExtra true si ofereix serveis extra.
-     * @param codiWifi el codi de la xarxa Wi-Fi.
-     * (Altres paràmetres igual que `afegirBungalow`)
+     * Inicialitza les dades del càmping amb valors predeterminats.
      */
-    void afegirBungalowPremium(String nom_, String idAllotjament_, String mida, int habitacions, int placesPersones,
-                               int placesParquing, boolean terrassa, boolean tv, boolean aireFred,
-                               boolean serveisExtra, String codiWifi);
-
-    /**
-     * Afegeix una casa glamping a la llista d'allotjaments.
-     * @param material el material del que està fet.
-     * @param casaMascota true si accepta mascotes.
-     * (Altres paràmetres igual que `afegirBungalow`)
-     */
-    void afegirGlamping(String nom_, String idAllotjament_, String mida, int habitacions, int placesPersones,
-                        String material, boolean casaMascota);
-
-
-    /**
-     *  Afegeix una mobil-home a la llista d'allotjaments.
-     * @param terrassaBarbacoa true si disposa de terrassa amb barbacoa.
-     * (Altres paràmetres igual que `afegirBungalow`)
-     */
-    void afegirMobilHome(String nom_, String idAllotjament_, String mida, int habitacions, int placesPersones,
-                         boolean terrassaBarbacoa);
-
-
-    /**
-     * Afegeix una nova reserva al càmping. Per fer-ho fa el següent: cerca el soci que vol fer la reserva i el servei que es vol reservar amb la informació necessària rebuda com a paràmetres i invoca al mètode afegirReserva de la classe LlistaReserves que crearà la reserva, si es pot, i la afegirà a la llista de reserves.
-     * @param id_ l'identificador de l'allotjament.
-     * @param dni_ el DNI del client que fa la reserva.
-     * @param dataEntrada la data d'entrada.
-     * @param dataSortida la data de sortida.
-     * @throws ExcepcioReserva si no es pot realitzar la reserva.
-     */
-    void afegirReserva(String id_, String dni_, LocalDate dataEntrada, LocalDate dataSortida) throws ExcepcioReserva;
-
-    /**
-     * Recorre la llista de serveis comprovant el correcte funcionament de cadascun d'ells per contar el número de serveis que estan operatius.
-     * @return el nombre de serveis operatius.
-     */
-    int calculAllotjamentsOperatius();
-
-    /**
-     * Cerca i retorna l'allotjament amb estada mínima de la temporada alta més curta.
-     * @return l'allotjament amb estada mínima de la temporada baixa més curta.
-     */
-    Allotjament getAllotjamentEstadaMesCurta(InAllotjament.Temp temp);
-
-
-
+    void inicialitzaDadesCamping();
 }
-

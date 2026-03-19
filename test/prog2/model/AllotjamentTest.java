@@ -1,9 +1,10 @@
 package prog2.model;
 
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import prog2.vista.ExcepcioReserva;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AllotjamentTest {
 
@@ -13,36 +14,17 @@ class AllotjamentTest {
     void setUp() {
         // Creem una instància anònima d'Allotjament per a tests
 
-        allotjament = new Allotjament("Allotjament Test", "ID001", 5, 3) {
-            @Override
-            public boolean correcteFuncionament() {
-                return false;
-            }
-        };
-
+        allotjament = new Parcela("Allotjament Test", "ID001", true, "100%", 64.0f, true);
     }
 
     @Test
-    void constructorValid() {
+    void comprovarConstructor() {
         assertEquals("Allotjament Test", allotjament.getNom());
         assertEquals("ID001", allotjament.getId());
-        assertEquals(5, allotjament.getEstadaMinima(InAllotjament.Temp.ALTA));
-        assertEquals(3, allotjament.getEstadaMinima(InAllotjament.Temp.BAIXA));
-    }
-
-
-
-    @Test
-    void testSetEstadaMinima() {
-        allotjament.setEstadaMinima(6, 4);
-        assertEquals(6, allotjament.getEstadaMinima(InAllotjament.Temp.ALTA));
-        assertEquals(4, allotjament.getEstadaMinima(InAllotjament.Temp.BAIXA));
-    }
-
-    @Test
-    void testToString() {
-        String expected = "Nom=Allotjament Test, Id=ID001, estada mínima en temp ALTA: 5, estada mínima en temp BAIXA: 3.";
-        assertEquals(expected, allotjament.toString());
+        assertEquals(4, allotjament.getEstadaMinima(InAllotjament.Temp.ALTA));
+        assertEquals(2, allotjament.getEstadaMinima(InAllotjament.Temp.BAIXA));
+        assertEquals(true, allotjament.isOperatiu());
+        assertEquals("100%", allotjament.getIluminacio());
     }
 }
 

@@ -7,7 +7,7 @@ import java.util.Iterator;
 import prog2.vista.ExcepcioReserva;
 
 
-public class Camping implements InCamping{
+public class Camping implements InCamping {
     private String nom;
     private ArrayList<Allotjament> allotjaments;
     private ArrayList<Client> clients;
@@ -22,35 +22,56 @@ public class Camping implements InCamping{
     }
 
     //Constructor complert
-    public Camping(String nom,  ArrayList<Allotjament> allotjaments, ArrayList<Client> clients, LlistaReserves reserves) {
+    public Camping(String nom, ArrayList<Allotjament> allotjaments, ArrayList<Client> clients, LlistaReserves reserves) {
         this.nom = nom;
         this.allotjaments = allotjaments;
         this.clients = clients;
         this.reserves = reserves;
     }
+
     // Mètode que retorna el nom del camping
-    public String getNom(){ return this.nom; }
+    public String getNom() {
+        return this.nom;
+    }
+
     //Retorna la llista de reserves del camping.
-    public LlistaReserves getLlistaReserves(){ return this.reserves; }
+    public LlistaReserves getLlistaReserves() {
+        return this.reserves;
+    }
+
     //Retorna la llista d'allotjaments del camping
-    public ArrayList<Allotjament> getLlistaAllotjaments(){ return this.allotjaments; }
+    public ArrayList<Allotjament> getLlistaAllotjaments() {
+        return this.allotjaments;
+    }
+
     //Retorna la llista de clients del camping
-    public ArrayList<Client> getLlistaClients(){ return this.clients; }
+    public ArrayList<Client> getLlistaClients() {
+        return this.clients;
+    }
+
     //Retorna el número total d'allotjaments del càmping
-    public int getNumAllotjaments(){ return this.allotjaments.size(); }
+    public int getNumAllotjaments() {
+        return this.allotjaments.size();
+    }
+
     //Retorna el número total de reserves del càmping
-    public int getNumReserves(){ return this.reserves.getNumReserves(); }
+    public int getNumReserves() {
+        return this.reserves.getNumReserves();
+    }
+
     //Retorna el número total de clients del càmping
-    public int getNumClients(){ return this.clients.size(); }
+    public int getNumClients() {
+        return this.clients.size();
+    }
 
     //Crea un nou objecte de tipus Client i l'afegeix a la llista de clients
-    public void afegirClient(String nom_, String dni_){
+    public void afegirClient(String nom_, String dni_) {
         Client client = new Client(nom_, dni_);
         this.clients.add(client);
     }
 
     //Afegeix una nova parcel·la a la llista d'allotjaments
-    public void afegirParcela(String nom_, String idAllotjament_, float metres, boolean connexioElectrica){
+    public void afegirParcela(String nom_, String idAllotjament_, float metres, boolean connexioElectrica) {
         Parcela parcela = new Parcela(nom_, idAllotjament_, metres, connexioElectrica);
         this.allotjaments.add(parcela);
     }
@@ -68,13 +89,13 @@ public class Camping implements InCamping{
     }
 
     //Afegeix una casa glamping a la llista d'allotjaments
-    public void afegirGlamping(String nom_, String idAllotjament_, String mida, int habitacions, int placesPersones, String material, boolean casaMascota){
+    public void afegirGlamping(String nom_, String idAllotjament_, String mida, int habitacions, int placesPersones, String material, boolean casaMascota) {
         Glamping glamping = new Glamping(nom_, idAllotjament_, mida, habitacions, placesPersones, material, casaMascota, 3, 3);
         allotjaments.add(glamping);
     }
 
     //Afegeix una mobil-home a la llista d'allotjaments
-    public void afegirMobilHome(String nom_, String idAllotjament_, String mida, int habitacions, int placesPersones, boolean terrassaBarbacoa){
+    public void afegirMobilHome(String nom_, String idAllotjament_, String mida, int habitacions, int placesPersones, boolean terrassaBarbacoa) {
         MobilHome mobilHome = new MobilHome(nom_, idAllotjament_, mida, habitacions, placesPersones, terrassaBarbacoa, 5, 3);
         allotjaments.add(mobilHome);
     }
@@ -104,9 +125,9 @@ public class Camping implements InCamping{
     }
 
     //Afegeix una nova reserva al càmping
-    public void afegirReserva(String id_, String dni_, LocalDate dataEntrada, LocalDate dataSortida) throws ExcepcioReserva{
+    public void afegirReserva(String id_, String dni_, LocalDate dataEntrada, LocalDate dataSortida) throws ExcepcioReserva {
         Allotjament allotjament = buscarAllotjament(id_);
-        if(allotjament == null) {
+        if (allotjament == null) {
             throw new ExcepcioReserva("L'allotjament amb id " + id_ + " no existeix"); //No existeix un allotjament amb aquest id
         }
         Client client = buscarClient(dni_);
@@ -130,8 +151,8 @@ public class Camping implements InCamping{
     }
 
     //Cerca i retorna l'allotjament amb estada mínima de la temporada alta més curta
-    public Allotjament getAllotjamentEstadaMesCurta(InAllotjament.Temp temp){
-        if(allotjaments.isEmpty()) {
+    public Allotjament getAllotjamentEstadaMesCurta(InAllotjament.Temp temp) {
+        if (allotjaments.isEmpty()) {
             return null;
         }
         Iterator<Allotjament> it = allotjaments.iterator();
