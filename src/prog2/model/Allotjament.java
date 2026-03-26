@@ -7,11 +7,18 @@ public abstract class Allotjament implements InAllotjament{
     private long estadaMinimaAlta;
     private long estadaMinimaBaixa;
 
+    // Nous atributs de allotjament
+    private boolean operatiu;
+    private String iluminacio;
+
     // Constructor de Allotjament
     public Allotjament(String nom, String id, long estadaMinimaAlta, long estadaMinimaBaixa){
         this.nom = nom;
         this.id = id;
-        setEstadaMinima(estadaMinimaAlta, estadaMinimaBaixa);
+        this.estadaMinimaBaixa = estadaMinimaBaixa;
+        this.estadaMinimaAlta = estadaMinimaAlta;
+        this.operatiu = true;
+        this.iluminacio = "100%";
     }
 
     // Retorna el nom
@@ -55,16 +62,49 @@ public abstract class Allotjament implements InAllotjament{
         this.estadaMinimaBaixa = estadaMinimaBaixa;
     }
 
-    // Mètode abstracte que també han de tenir els que hereten els mètodes
-    // Cada subclasse ho fa seguint la seva pròpia lògica
+    // Setter de operatiu
+    public void setOperatiu(boolean operatiu){
+        this.operatiu = operatiu;
+    }
+
+    // Getter de operatiu
+    public boolean isOperatiu(){
+        return operatiu;
+    }
+    // Setter de iluminacio
+    public void setIluminacio(String iluminacio){
+        this.iluminacio = iluminacio;
+    }
+    // Getter de Iluminacio
+    public String getIluminacio(){
+        return iluminacio;
+    }
+
     @Override
-    public abstract boolean correcteFuncionament();
+    public void tancarAllotjament(TascaManteniment tasca){
+        // Deixa d'estar operatiu
+        this.operatiu = false;
+        // Iluminacio depen del tipus de tasca
+        this.iluminacio = tasca.getIluminacioAllotjament();
+    }
+    @Override
+    public void obrirAllotjament(){
+        // Torna a estar operatiu
+        this.operatiu = true;
+        // Torna la iluminacio al 100%
+        this.iluminacio = "100%";
+    }
 
     // Retornem els valors que hem guardat en forma de string
     @Override
     public String toString() {
         return "Nom=" + this.nom + ", Id=" + this.id +
                 ", estada mínima en temp ALTA: " + this.estadaMinimaAlta +
-                ", estada mínima en temp BAIXA: " + this.estadaMinimaBaixa + ".";
+                ", estada mínima en temp BAIXA: " + this.estadaMinimaBaixa +
+                // Afegim operatiu i iluminacio al toString
+                // Si operatiu es true donarà "Sí", en cas contrari serà "No"
+                ", Operatiu: " + (this.operatiu ? "Sí" : "No") +
+                ", Iluminacio: " + this.iluminacio + ".";
+
     }
 }
