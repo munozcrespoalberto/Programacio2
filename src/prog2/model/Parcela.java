@@ -6,10 +6,12 @@ public class Parcela extends Allotjament{
     private float mida;
     private boolean electricitat;
 
-    public Parcela(String nom, String id, float mida, boolean electricitat){
+    public Parcela(String nom, String id, boolean operatiu, String iluminacio, float mida, boolean electricitat) {
         super(nom, id, 4, 2);
         this.mida = mida;
         this.electricitat = electricitat;
+        this.setOperatiu(operatiu);
+        this.setIluminacio(iluminacio);
     }
 
     // Mètode que retorna la mida de la parcel·la

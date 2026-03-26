@@ -6,12 +6,16 @@ public abstract class Acces implements InAcces{
     private String nom;
     private boolean estat;
     private LlistaAllotjaments llistaAllotjaments;
-
     // Constructor
-    public Acces(String nom){
+    public Acces(String nom) {
         this.nom = nom;
-        // Esta obert per defecte
-        this.estat = true;
+        this.estat = true; // Esta obert per defecte
+        this.llistaAllotjaments = new LlistaAllotjaments();
+    }
+    // Constructor però posem estat
+    public Acces(String nom, boolean estat) {
+        this.nom = nom;
+        this.estat = estat;
         this.llistaAllotjaments = new LlistaAllotjaments();
     }
 
@@ -55,6 +59,4 @@ public abstract class Acces implements InAcces{
                 ". Accessibilitat: " + (isAccessibilitat() ? "Sí" : "No") +
                 ", Estat: " + (estat ? "Obert" : "Tancat");
     }
-
-
 }

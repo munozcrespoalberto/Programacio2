@@ -62,17 +62,14 @@ public abstract class Allotjament implements InAllotjament{
         this.estadaMinimaBaixa = estadaMinimaBaixa;
     }
 
-    // Setter de operatiu
-    public void setOperatiu(boolean operatiu){
-        this.operatiu = operatiu;
-    }
-
+    // Setter de operatiu. Ho poso protected en cas de necesitar accedir a aixó en un futur des de una classe filla d'allotjament
+    protected void setOperatiu(boolean operatiu) { this.operatiu = operatiu; }
     // Getter de operatiu
     public boolean isOperatiu(){
         return operatiu;
     }
-    // Setter de iluminacio
-    public void setIluminacio(String iluminacio){
+    // Setter de iluminacio. Ho poso protected en cas de necesitar accedir a aixó en un futur des de una classe filla d'allotjament
+    protected void setIluminacio(String iluminacio){
         this.iluminacio = iluminacio;
     }
     // Getter de Iluminacio
