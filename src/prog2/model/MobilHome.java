@@ -14,12 +14,6 @@ public class MobilHome extends Casa {
         this.terrassaBarbacoa = terrassaBarbacoa;
     }
 
-    //Comprova el funcionament (si te terrasa + barbacoa funciona)
-    @Override
-    public boolean correcteFuncionament(){
-        return this.terrassaBarbacoa;
-    }
-
     @Override
     public String toString() {
         // Primero obtenemos la información de Casa (que ya incluye la de Allotjament)

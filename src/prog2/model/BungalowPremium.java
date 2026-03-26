@@ -19,11 +19,6 @@ public class BungalowPremium extends Bungalow {
     public void setCodiWifi(String codiWifi) { this.codiWifi = codiWifi; }
 
     @Override
-    public boolean correcteFuncionament(){
-        // Comprovo que no sigui null perque en cas de ser null, els .length() donarà error i les comparacions també.
-        return isAireFred() && codiWifi != null && codiWifi.length() >= 8 && codiWifi.length() <= 16;
-    }
-    @Override
     public String toString() {
         String infoBase = super.toString();
         return infoBase + " BungalowPremium{serveisExtra=" + serveisExtra + ", codiWifi=" + codiWifi + "}";

@@ -32,13 +32,6 @@ public class Parcela extends Allotjament{
         this.electricitat = electricitat;
     }
 
-
-    @Override
-    // Una parcela funciona correctament si te connexió elèctrica
-    public boolean correcteFuncionament() {
-        return this.electricitat;
-    }
-
     // Mètode que ens mostra les característiques que te la parcel·la
     @Override
     public String toString() {

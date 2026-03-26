@@ -34,10 +34,6 @@ public class Bungalow extends Casa{
         this.aireFred = aireFred;
     }
 
-    @Override
-    public boolean correcteFuncionament(){
-        return this.aireFred;
-    }
 
     @Override
     public String toString() {

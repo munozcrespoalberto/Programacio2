@@ -21,11 +21,6 @@ public class Glamping extends Casa {
     }
 
     @Override
-    public boolean correcteFuncionament(){
-        return this.casaMascota;
-    }
-
-    @Override
     public String toString() {
         // Primero obtenemos la información de Casa (que ya incluye la de Allotjament)
         String infoBase = super.toString();
