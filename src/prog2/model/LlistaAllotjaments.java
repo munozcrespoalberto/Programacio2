@@ -35,7 +35,7 @@ public class LlistaAllotjaments implements InLlistaAllotjaments{
         } else {
             throw new ExcepcioCamping("Estat no vàlid. Ha de ser 'Operatiu' o 'No Operatiu'");
         }
-        StringBuffer resultat = new StringBuffer();
+        StringBuilder resultat = new StringBuilder(); // StringBuilder es com StringBuffer pero mes rapid
         boolean trobat = false;
         for (Allotjament a : allotjaments) {
             if (a.isOperatiu() == operatiu) {

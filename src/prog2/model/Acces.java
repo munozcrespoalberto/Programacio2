@@ -56,7 +56,7 @@ public abstract class Acces implements InAcces{
     @Override
     public String toString(){
         return "Acces: " + nom  +
-                ". Accessibilitat: " + (isAccessibilitat() ? "Sí" : "No") +
-                ", Estat: " + (estat ? "Obert" : "Tancat");
+                ", accessibilitat: " + (isAccessibilitat() ? "Sí" : "No") +
+                ", estat: " + (estat ? "Obert" : "Tancat");
     }
 }
