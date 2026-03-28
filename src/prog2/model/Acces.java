@@ -6,13 +6,15 @@ public abstract class Acces implements InAcces{
     private String nom;
     private boolean estat;
     private LlistaAllotjaments llistaAllotjaments;
-    // Constructor
+
+    // Constructor només amb nom
     public Acces(String nom) {
         this.nom = nom;
         this.estat = true; // Esta obert per defecte
         this.llistaAllotjaments = new LlistaAllotjaments();
     }
-    // Constructor però posem estat
+
+    // Constructor quan passa per paràmetres nom i estat
     public Acces(String nom, boolean estat) {
         this.nom = nom;
         this.estat = estat;
