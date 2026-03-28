@@ -62,12 +62,12 @@ public class ExempleMenu {
             // Fem les accions necessÃ ries
             switch(opcio) {
                 case MENU_PRINCIPAL_OPCIO1:
-                    // Mostrem un missatge indicant que s'ha triat aquesta opciÃ³
-                    System.out.println("Has triat la opciÃ³ 1");
+                    // Mostrem un missatge indicant que s'ha triat aquesta opcio
+                    System.out.println("Has triat la opció 1");
                     break;
                 case MENU_PRINCIPAL_OPCIO2:
-                    // Mostrem un missatge indicant que s'ha triat aquesta opciÃ³
-                    System.out.println("Has triat la opciÃ³ 2");
+                    // Mostrem un missatge indicant que s'ha triat aquesta opcio
+                    System.out.println("Has triat la opció 2");
                     break;
                 case MENU_PRINCIPAL_SUBMENU1:
                     // Cridem el métode de gestió del menú secundari
@@ -107,11 +107,11 @@ public class ExempleMenu {
             switch(opcio) {
                 case MENU_S1_OPCIO1:
                     // Mostrem un missatge indicant que s'ha triat aquesta opció
-                    System.out.println("Has triat la opciÃ³ 1");
+                    System.out.println("Has triat la opció 1");
                     break;
                 case MENU_S1_OPCIO2:
                     // Mostrem un missatge indicant que s'ha triat aquesta opció
-                    System.out.println("Has triat la opciÃ³ 2");
+                    System.out.println("Has triat la opció 2");
                     break;
                 case MENU_S1_SORTIR:
                     System.out.println("Fins aviat!");
