@@ -20,7 +20,7 @@ public class LlistaTasquesManteniment implements InLlistaTasquesManteniment, Ser
         this.tasques = new ArrayList<>();
     }
 
-
+    // Comprova si el allotjament ja te una tasca activa o si la nova tasca a asignar es valida. Si tot esta bé crea una nova tasca i la afegeix a la llista
     @Override
     public void afegirTascaManteniment(int num, String tipus, Allotjament allotjament, String data, int dies) throws ExcepcioCamping {
 

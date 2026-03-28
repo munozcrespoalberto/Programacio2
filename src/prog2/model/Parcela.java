@@ -2,16 +2,15 @@ package prog2.model;
 
 public class Parcela extends Allotjament{
 
-
     private float mida;
     private boolean electricitat;
 
-    public Parcela(String nom, String id, boolean operatiu, String iluminacio, float mida, boolean electricitat) {
+    // Constructor, Allotjament inicialitza l'iluminacio i operatiu
+    public Parcela(String nom, String id, float mida, boolean electricitat) {
         super(nom, id, 4, 2);
         this.mida = mida;
         this.electricitat = electricitat;
-        this.setOperatiu(operatiu);
-        this.setIluminacio(iluminacio);
+        // operatiu = true i iluminacio = 100%. Aquestos s'inicialitzen al constructor d'Allotjament
     }
 
     // Mètode que retorna la mida de la parcel·la

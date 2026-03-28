@@ -1,184 +1,202 @@
 package prog2.model;
 
+import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import prog2.vista.ExcepcioReserva;
+import prog2.vista.ExcepcioCamping;
 
 
 public class Camping implements InCamping {
     private String nom;
-    private ArrayList<Allotjament> allotjaments;
-    private ArrayList<Client> clients;
-    private LlistaReserves reserves;
+    private LlistaAllotjaments allotjaments;
+    private LlistaAccessos accessos;
+    private LlistaTasquesManteniment tasques;
 
-    //Constructor de camping només amb nom
+    // Constructor de camping, només nom i inicialitzar llistes
     public Camping(String nom) {
         this.nom = nom;
-        this.allotjaments = new ArrayList<>();
-        this.clients = new ArrayList<>();
-        this.reserves = new LlistaReserves();
+        this.allotjaments = new LlistaAllotjaments();
+        this.accessos = new LlistaAccessos();
+        this.tasques = new LlistaTasquesManteniment();
     }
 
-    //Constructor complert
-    public Camping(String nom, ArrayList<Allotjament> allotjaments, ArrayList<Client> clients, LlistaReserves reserves) {
-        this.nom = nom;
-        this.allotjaments = allotjaments;
-        this.clients = clients;
-        this.reserves = reserves;
-    }
-
-    // Mètode que retorna el nom del camping
-    public String getNom() {
+    @Override
+    public String getNomCamping() {
         return this.nom;
     }
 
-    //Retorna la llista de reserves del camping.
-    public LlistaReserves getLlistaReserves() {
-        return this.reserves;
-    }
-
-    //Retorna la llista d'allotjaments del camping
-    public ArrayList<Allotjament> getLlistaAllotjaments() {
-        return this.allotjaments;
-    }
-
-    //Retorna la llista de clients del camping
-    public ArrayList<Client> getLlistaClients() {
-        return this.clients;
-    }
-
-    //Retorna el número total d'allotjaments del càmping
-    public int getNumAllotjaments() {
-        return this.allotjaments.size();
-    }
-
-    //Retorna el número total de reserves del càmping
-    public int getNumReserves() {
-        return this.reserves.getNumReserves();
-    }
-
-    //Retorna el número total de clients del càmping
-    public int getNumClients() {
-        return this.clients.size();
-    }
-
-    //Crea un nou objecte de tipus Client i l'afegeix a la llista de clients
-    public void afegirClient(String nom_, String dni_) {
-        Client client = new Client(nom_, dni_);
-        this.clients.add(client);
-    }
-
-    //Afegeix una nova parcel·la a la llista d'allotjaments
-    public void afegirParcela(String nom_, String idAllotjament_, float metres, boolean connexioElectrica) {
-        Parcela parcela = new Parcela(nom_, idAllotjament_, metres, connexioElectrica);
-        this.allotjaments.add(parcela);
-    }
-
-    //Afegeix un nou bungalow a la llista d'allotjaments
-    public void afegirBungalow(String nom_, String idAllotjament_, String mida, int habitacions, int placesPersones, int placesParquing, boolean terrassa, boolean tv, boolean aireFred) {
-        Bungalow bungalow = new Bungalow(nom_, idAllotjament_, mida, habitacions, placesPersones, placesParquing, terrassa, tv, aireFred, 7, 4);
-        allotjaments.add(bungalow);
-    }
-
-    //Afegeix un bungalow premium a la llista d'allotjaments
-    public void afegirBungalowPremium(String nom_, String idAllotjament_, String mida, int habitacions, int placesPersones, int placesParquing, boolean terrassa, boolean tv, boolean aireFred, boolean serveisExtra, String codiWifi) {
-        BungalowPremium bungalowPremium = new BungalowPremium(nom_, idAllotjament_, mida, habitacions, placesPersones, placesParquing, terrassa, tv, aireFred, serveisExtra, codiWifi, 7, 4);
-        allotjaments.add(bungalowPremium);
-    }
-
-    //Afegeix una casa glamping a la llista d'allotjaments
-    public void afegirGlamping(String nom_, String idAllotjament_, String mida, int habitacions, int placesPersones, String material, boolean casaMascota) {
-        Glamping glamping = new Glamping(nom_, idAllotjament_, mida, habitacions, placesPersones, material, casaMascota, 3, 3);
-        allotjaments.add(glamping);
-    }
-
-    //Afegeix una mobil-home a la llista d'allotjaments
-    public void afegirMobilHome(String nom_, String idAllotjament_, String mida, int habitacions, int placesPersones, boolean terrassaBarbacoa) {
-        MobilHome mobilHome = new MobilHome(nom_, idAllotjament_, mida, habitacions, placesPersones, terrassaBarbacoa, 5, 3);
-        allotjaments.add(mobilHome);
-    }
-
-    //Metode privat creat per no haver de posar tot a afegirReserva. Busca un allotjament associat amb un id concret
-    private Allotjament buscarAllotjament(String id_) {
-        Iterator<Allotjament> it = allotjaments.iterator();
-        while (it.hasNext()) { //Mentre quedin elements
-            Allotjament a = it.next(); //Seguent element
-            if (a.getId().equals(id_)) {
-                return a;
-            }
+    // Llista els allotjaments amb l'estat indicat sempre i quan estat sigui "Operatiu" o "No operatiu"
+    @Override
+    public String llistarAllotjaments(String estat) throws ExcepcioCamping {
+        if(estat == null) {
+            throw new ExcepcioCamping("Estat ha de ser Operatiu o No operatiu");
+        } else if (!estat.equalsIgnoreCase("Operatiu") && !estat.equalsIgnoreCase("No operatiu")) {
+            throw new ExcepcioCamping("Estat ha de ser 'Operatiu' o 'No operatiu'.");
         }
-        return null;
+        return allotjaments.llistarAllotjaments(estat);
     }
 
-    //El mateix que el metode de buscarAllotjament pero amb Clients i el seu DNI
-    private Client buscarClient(String dni_) {
-        Iterator<Client> it = clients.iterator(); //Iterador de la llista de clients
-        while (it.hasNext()) {
-            Client client = it.next(); //Anem client en client
-            if (client.getDni().equals(dni_)) {
-                return client; // Si trobem un client amb aquest dni
-            }
-        }
-        return null;
-    }
-
-    //Afegeix una nova reserva al càmping
-    public void afegirReserva(String id_, String dni_, LocalDate dataEntrada, LocalDate dataSortida) throws ExcepcioReserva {
-        Allotjament allotjament = buscarAllotjament(id_);
-        if (allotjament == null) {
-            throw new ExcepcioReserva("L'allotjament amb id " + id_ + " no existeix"); //No existeix un allotjament amb aquest id
-        }
-        Client client = buscarClient(dni_);
-        if (client == null) {
-            throw new ExcepcioReserva("El client amb DNI " + dni_ + " no existeix"); //No existeix un client amb aquest id
-        }
-        reserves.afegirReserva(allotjament, client, dataEntrada, dataSortida);
-    }
-
-    //Recorre la llista de serveis comprovant el correcte funcionament de cadascun d'ells per contar el número de serveis que estan operatius
-    public int calculAllotjamentsOperatius() {
-        int operatius = 0;
-        Iterator<Allotjament> it = this.allotjaments.iterator();
-        while (it.hasNext()) {
-            Allotjament a = it.next();
-            if (a.correcteFuncionament()) {
-                operatius++;
-            }
-        }
-        return operatius; //Nombre d'allotjaments operatius
-    }
-
-    //Cerca i retorna l'allotjament amb estada mínima de la temporada alta més curta
-    public Allotjament getAllotjamentEstadaMesCurta(InAllotjament.Temp temp) {
-        if (allotjaments.isEmpty()) {
-            return null;
-        }
-        Iterator<Allotjament> it = allotjaments.iterator();
-        Allotjament mesCurta = it.next(); //Primer element
-        long minEstada = mesCurta.getEstadaMinima(temp);
-        while (it.hasNext()) {
-            Allotjament a = it.next();
-            long estada = a.getEstadaMinima(temp);
-            if (estada < minEstada) {
-                minEstada = estada;
-                mesCurta = a;
-            }
-        }
-        return mesCurta;
-    }
-
-    //Identifica en quina temporada estem segons la data
-    public static InAllotjament.Temp getTemporada(LocalDate data) {
-        int dia = data.getDayOfMonth();
-        int mes = data.getMonthValue();
-
-        // Temporada alta: 21 març a 20 setembre
-        if ((mes == 3 && dia >= 21) || (mes > 3 && mes < 9) || (mes == 9 && dia <= 20)) {
-            return InAllotjament.Temp.ALTA;
+    // Llista els accessos amb l'estat indicat sempre i quan infoEstat sigui "Obert" o "Tancat"
+    @Override
+    public String llistarAccessos(String infoEstat) throws ExcepcioCamping {
+        boolean obert;
+        if (infoEstat.equalsIgnoreCase("Obert")) { // No sé bé que pot ser estat, suposo que es No operatiu o Operatiu.
+            obert = true;
+        } else if (infoEstat.equalsIgnoreCase("Tancat")) { // Utlitzo a les dues comparacions equalsIgnoreCase que es el mateix que equals pero no l'importa si el string esta en majuscules i tal, com no se que pot ser "estat" va molt bé.
+            obert = false;
         } else {
-            return InAllotjament.Temp.BAIXA;
+            throw new ExcepcioCamping("Estat no vàlid. Ha de ser 'Obert' o 'Tancat'.");
         }
+        return accessos.llistarAccessos(obert);
+    }
+
+    // Llista les tasques de manteniment
+    @Override
+    public String llistarTasquesManteniment() throws ExcepcioCamping {
+        return tasques.llistarTasquesManteniment();
+    }
+
+    // Primer agafa l'allotjament amb l'id donat, si no hi ha llança excepció. Després d'agafar l'allotjament, li afegeix una tasca de manteniment
+    @Override
+    public void afegirTascaManteniment(int num, String tipus, String idAllotjament, String data, int dies) throws ExcepcioCamping {
+        Allotjament allotjament = allotjaments.getAllotjament(idAllotjament);
+        tasques.afegirTascaManteniment(num, tipus, allotjament, data, dies);
+        accessos.actualitzaEstatAccessos();
+    }
+
+    // Completa la tasca amb el numero indicat i despres actualitza els estats dels accessos
+    @Override
+    public void completarTascaManteniment(int num) throws ExcepcioCamping {
+        tasques.completarTascaManteniment(tasques.getTascaManteniment(num));
+        accessos.actualitzaEstatAccessos();
+    }
+
+    // Utilitza el metode calculaAccessosNoAccessibles de LlistaAccessos
+    @Override
+    public int calculaAccessosNoAccessibles() {
+        return accessos.calculaAccessosNoAccessibles();
+    }
+
+    // Utilitza el metode calculaMetresTerra de LlistaAccessos
+    @Override
+    public float calculaMetresTerra() {
+        return accessos.calculaMetresTerra();
+    }
+
+    // Guarda l'objecte Camping complert en un arxiu utilitzant ObjectOutputStream.
+    public void save(String camiDesti) throws ExcepcioCamping {
+        // try-with-resources = tanca automaticament els arxius al final del try catch.
+        // ObjectOutputStream = escriure al fitxer
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(camiDesti))) { // FileOutputStream crea un nou arxiu i ObjectOutputStream ens permet modificar-ho
+            oos.writeObject(this); // Escriu dins l'arxiu l'objecte actual,
+        } catch (IOException e) {
+            throw new ExcepcioCamping("Error en guardar el camping: " + e.getMessage());
+        }
+    }
+
+    // Load es com un getCamping pero totes les dades del camping han passat per un arxiu quan feiem el save.
+    public static Camping load(String camiOrigen) throws ExcepcioCamping {
+        // ObjectInputStream = llegir el fitxer
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(camiOrigen))) {
+            return (Camping) ois.readObject(); // retorna el nostre camping, com un getCamping
+        } catch (IOException | ClassNotFoundException e) {
+            throw new ExcepcioCamping("Error en carregar el camping: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public void inicialitzaDadesCamping() {
+
+        // ========== ALOJAMIENTOS ==========
+
+        // Parcelas
+        Parcela parcelaNord = new Parcela("Parcella Nord", "ALL1", 64, true);
+        Parcela parcelaSud = new Parcela("Parcella Sud", "ALL2", 64, true);
+        allotjaments.afegirAllotjament(parcelaNord);
+        allotjaments.afegirAllotjament(parcelaSud);
+
+        // Bungalow
+        Bungalow bungalowNord = new Bungalow("Bungalow Nord", "ALL3", "22 m²", 2, 4, 1, true, true, true, 7, 4);
+        allotjaments.afegirAllotjament(bungalowNord);
+
+        // Bungalow Premium
+        BungalowPremium bungalowSud = new BungalowPremium("Bungalow Sud", "ALL4", "27 m²", 2, 6, 1, true, true, true, true, "WIFI123", 7, 4);
+        allotjaments.afegirAllotjament(bungalowSud);
+
+        // Glamping
+        Glamping glampingNord = new Glamping("Glamping Nord", "ALL5", "20 m²", 1, 2, "tela", true, 5, 3);
+        allotjaments.afegirAllotjament(glampingNord);
+
+        // MobilHome
+        MobilHome mobilHomeSud = new MobilHome("Mobil-Home Sud", "ALL6", "22 m²", 2, 4, true, 5, 3);
+        allotjaments.afegirAllotjament(mobilHomeSud);
+
+        // ========== ACCESOS ==========
+
+        // A1: Camí asfaltat
+        CamiAsfalt a1 = new CamiAsfalt("A1", 200);
+        a1.afegirAllotjament(parcelaNord);
+        a1.afegirAllotjament(parcelaSud);
+        accessos.afegirAcces(a1);
+
+        // A2: Carretera asfaltada
+        CarreteraAsfalt a2 = new CarreteraAsfalt("A2", 800, 10000);
+        a2.afegirAllotjament(parcelaNord);
+        a2.afegirAllotjament(parcelaSud);
+        accessos.afegirAcces(a2);
+
+        // A3: Camí de terra
+        CamiTerra a3 = new CamiTerra("A3", 100);
+        a3.afegirAllotjament(bungalowNord);
+        accessos.afegirAcces(a3);
+
+        // A4: Carretera de terra
+        CarreteraTerra a4 = new CarreteraTerra("A4", 200, 3);
+        a4.afegirAllotjament(bungalowNord);
+        accessos.afegirAcces(a4);
+
+        // A5: Camí asfaltat
+        CamiAsfalt a5 = new CamiAsfalt("A5", 350);
+        a5.afegirAllotjament(bungalowSud);
+        accessos.afegirAcces(a5);
+
+        // A6: Carretera asfaltada
+        CarreteraAsfalt a6 = new CarreteraAsfalt("A6", 800, 12000);
+        a6.afegirAllotjament(bungalowSud);
+        accessos.afegirAcces(a6);
+
+        // A7: Camí asfaltat
+        CamiAsfalt a7 = new CamiAsfalt("A7", 100);
+        a7.afegirAllotjament(glampingNord);
+        a7.afegirAllotjament(mobilHomeSud);
+        accessos.afegirAcces(a7);
+
+        // A8: Carretera asfaltada
+        CarreteraAsfalt a8 = new CarreteraAsfalt("A8", 800, 10000);
+        a8.afegirAllotjament(glampingNord);
+        a8.afegirAllotjament(mobilHomeSud);
+        accessos.afegirAcces(a8);
+
+        // A9: Camí de terra
+        CamiTerra a9 = new CamiTerra("A9", 50);
+        a9.afegirAllotjament(parcelaSud);
+        accessos.afegirAcces(a9);
+
+        // A10: Carretera de terra
+        CarreteraTerra a10 = new CarreteraTerra("A10", 400, 4);
+        a10.afegirAllotjament(parcelaSud);
+        accessos.afegirAcces(a10);
+
+        // A11: Camí de terra
+        CamiTerra a11 = new CamiTerra("A11", 80);
+        a11.afegirAllotjament(mobilHomeSud);
+        accessos.afegirAcces(a11);
+
+        // A12: Carretera de terra
+        CarreteraTerra a12 = new CarreteraTerra("A12", 800, 5);
+        a12.afegirAllotjament(mobilHomeSud);
+        accessos.afegirAcces(a12);
     }
 }
