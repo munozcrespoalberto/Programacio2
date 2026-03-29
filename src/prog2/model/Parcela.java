@@ -13,6 +13,15 @@ public class Parcela extends Allotjament{
         // operatiu = true i iluminacio = 100%. Aquestos s'inicialitzen al constructor d'Allotjament
     }
 
+    // Constructor de 6 paràmetres per als tests
+    public Parcela(String nom, String id, boolean operatiu, String iluminacio, float mida, boolean electricitat) {
+        super(nom, id, 4, 2); // estades mínimes per defecte
+        this.mida = mida;
+        this.electricitat = electricitat;
+        setOperatiu(operatiu);
+        setIluminacio(iluminacio);
+    }
+
     // Mètode que retorna la mida de la parcel·la
     public float getMida(){
         return this.mida;

@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class LlistaTasquesManteniment implements InLlistaTasquesManteniment, Serializable {
+public class LlistaTasquesManteniment implements InLlistaTasquesManteniment, Serializable { // Serializable es per poder utilitzar ObjectOutputStream...
 
     /*
     * Aquesta classe que gestiona la llista de tasques de manteniment del camping permetent afegir,
