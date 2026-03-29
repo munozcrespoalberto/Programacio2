@@ -1,6 +1,8 @@
 package prog2.model;
 
-public class MobilHome extends Casa {
+import java.io.Serializable;
+
+public class MobilHome extends Casa implements Serializable {
     private boolean terrassaBarbacoa;
     // Aquí irán los atributos y métodos
     public MobilHome(String nom, String id, String mida, int habitacions, int placesPersones, boolean terrassaBarbacoa, long estadaMinimaAlta, long estadaMinimaBaixa) {

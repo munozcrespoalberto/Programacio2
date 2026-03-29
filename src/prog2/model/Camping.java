@@ -8,7 +8,7 @@ import java.util.Iterator;
 import prog2.vista.ExcepcioCamping;
 
 
-public class Camping implements InCamping {
+public class Camping implements InCamping, Serializable {
     private String nom;
     private LlistaAllotjaments allotjaments;
     private LlistaAccessos accessos;

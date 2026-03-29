@@ -1,6 +1,8 @@
 package prog2.model;
 
-public class CamiTerra extends AccesTerra{
+import java.io.Serializable;
+
+public class CamiTerra extends AccesTerra implements Serializable {
     // Constructor amb estat donat
     public CamiTerra(String nom, boolean estat, float longitud) {
         super(nom, estat, longitud);

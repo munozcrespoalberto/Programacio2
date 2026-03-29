@@ -1,6 +1,8 @@
 package prog2.model;
 
-public class TascaManteniment implements InTascaManteniment{
+import java.io.Serializable;
+
+public class TascaManteniment implements InTascaManteniment, Serializable {
 
     // Enum amb els tipus de tasques
     public static enum TipusTascaManteniment {
