@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import prog2.vista.ExcepcioCamping;
+import java.io.Serializable;
 
-
-public class Camping implements InCamping {
+public class Camping implements InCamping, Serializable {
     private String nom;
     private LlistaAllotjaments allotjaments;
     private LlistaAccessos accessos;

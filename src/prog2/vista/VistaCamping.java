@@ -6,7 +6,6 @@ public class VistaCamping {
     private Camping camping;
     private String nomCamping;
 
-    // Constructor
     public VistaCamping(String nomCamping) {
         this.nomCamping = nomCamping;
         this.camping = new Camping(nomCamping);

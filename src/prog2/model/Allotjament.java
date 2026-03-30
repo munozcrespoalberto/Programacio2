@@ -1,6 +1,6 @@
 package prog2.model;
-
-public abstract class Allotjament implements InAllotjament{
+import java.io.Serializable;
+public abstract class Allotjament implements InAllotjament, Serializable {
 
     private String nom;
     private String id;
