@@ -2,7 +2,7 @@ package prog2.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import prog2.vista.ExcepcioReserva;
+import prog2.vista.ExcepcioCamping;
 
 import java.time.LocalDate;
 
