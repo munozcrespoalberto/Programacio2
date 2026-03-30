@@ -1,6 +1,8 @@
 package prog2.model;
 
-public abstract class AccesAsfalt extends Acces {
+import java.io.Serializable;
+
+public abstract class AccesAsfalt extends Acces implements Serializable {
     private float metresQuadratsAsfalt;
 
     // Constructor amb estat donat

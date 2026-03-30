@@ -8,7 +8,7 @@ import java.util.Iterator;
 import prog2.vista.ExcepcioCamping;
 
 
-public class Camping implements InCamping, Serializable { // Serializable es per poder utilitzar ObjectOutputStream...
+public class Camping implements InCamping {
     private String nom;
     private LlistaAllotjaments allotjaments;
     private LlistaAccessos accessos;
@@ -76,21 +76,13 @@ public class Camping implements InCamping, Serializable { // Serializable es per
     // Utilitza el metode calculaAccessosNoAccessibles de LlistaAccessos
     @Override
     public int calculaAccessosNoAccessibles() {
-        try {
-            return accessos.calculaAccessosNoAccessibles();
-        } catch (ExcepcioCamping e) {
-            return 0;
-        }
+        return accessos.calculaAccessosNoAccessibles();
     }
 
     // Utilitza el metode calculaMetresTerra de LlistaAccessos
     @Override
     public float calculaMetresTerra() {
-        try {
-            return accessos.calculaMetresTerra();
-        } catch (ExcepcioCamping e) {
-            return 0;
-        }
+        return accessos.calculaMetresTerra();
     }
 
     // Guarda l'objecte Camping complert en un arxiu utilitzant ObjectOutputStream.

@@ -2,10 +2,9 @@ package prog2.model;
 
 import prog2.vista.ExcepcioCamping;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class LlistaAccessos implements InLlistaAccessos, Serializable { // Serializable es per poder utilitzar ObjectOutputStream...
+public class LlistaAccessos implements InLlistaAccessos{
     private ArrayList<Acces> accessos;
     public LlistaAccessos(){
         this.accessos = new ArrayList<>();

@@ -1,8 +1,6 @@
 package prog2.model;
 
-import java.io.Serializable;
-
-public abstract class Acces implements InAcces, Serializable { // Serializable es per poder utilitzar ObjectOutputStream...
+public abstract class Acces implements InAcces{
 
     // Atributs de tots els tipus d'accesos
     private String nom;

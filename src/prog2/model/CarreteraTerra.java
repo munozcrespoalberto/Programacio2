@@ -1,6 +1,8 @@
 package prog2.model;
 
-public class CarreteraTerra extends AccesTerra{
+import java.io.Serializable;
+
+public class CarreteraTerra extends AccesTerra implements Serializable {
     int amplada;
 
     // Constructor amb estat donat

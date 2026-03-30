@@ -1,8 +1,6 @@
 package prog2.model;
 
-import java.io.Serializable;
-
-public abstract class Allotjament implements InAllotjament, Serializable { // Serializable es per poder utilitzar ObjectOutputStream...
+public abstract class Allotjament implements InAllotjament{
 
     private String nom;
     private String id;

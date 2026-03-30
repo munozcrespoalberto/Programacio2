@@ -1,6 +1,8 @@
 package prog2.model;
 
-public class CarreteraAsfalt extends AccesAsfalt {
+import java.io.Serializable;
+
+public class CarreteraAsfalt extends AccesAsfalt implements Serializable {
     int pesMaxim;
 
     // Constructor amb estat donat

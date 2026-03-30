@@ -1,6 +1,8 @@
 package prog2.model;
 
-public abstract class AccesTerra extends Acces {
+import java.io.Serializable;
+
+public abstract class AccesTerra extends Acces implements Serializable {
     float longitud;
 
     // Constructor amb estat donat

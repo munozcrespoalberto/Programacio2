@@ -1,8 +1,6 @@
 package prog2.model;
 
-import java.io.Serializable;
-
-public class TascaManteniment implements InTascaManteniment, Serializable { // Serializable es per poder utilitzar ObjectOutputStream...
+public class TascaManteniment implements InTascaManteniment{
 
     // Enum amb els tipus de tasques
     public static enum TipusTascaManteniment {

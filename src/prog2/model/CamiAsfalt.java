@@ -1,6 +1,8 @@
 package prog2.model;
 
-public class CamiAsfalt extends AccesAsfalt {
+import java.io.Serializable;
+
+public class CamiAsfalt extends AccesAsfalt implements Serializable {
     // Constructor amb estat donat
     public CamiAsfalt(String nom, boolean estat, float metresQuadratsAsfalt) {
         super(nom, estat, metresQuadratsAsfalt);
