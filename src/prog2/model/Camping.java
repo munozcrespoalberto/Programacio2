@@ -76,13 +76,21 @@ public class Camping implements InCamping, Serializable {
     // Utilitza el metode calculaAccessosNoAccessibles de LlistaAccessos
     @Override
     public int calculaAccessosNoAccessibles() {
-        return accessos.calculaAccessosNoAccessibles();
+        try {
+            return accessos.calculaAccessosNoAccessibles();
+        }catch(ExcepcioCamping e){
+            return 0; // Si no hi ha retornem zero
+        }
     }
 
     // Utilitza el metode calculaMetresTerra de LlistaAccessos
     @Override
     public float calculaMetresTerra() {
-        return accessos.calculaMetresTerra();
+        try{
+            return accessos.calculaMetresTerra();
+        }catch(ExcepcioCamping e){
+            return 0; // Si no hi ha retornem zero
+        }
     }
 
     // Guarda l'objecte Camping complert en un arxiu utilitzant ObjectOutputStream.
