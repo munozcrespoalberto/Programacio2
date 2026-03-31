@@ -78,8 +78,7 @@ public class LlistaAccessosTest {
     @Test
     void testActualitzaEstatAccessosSenseAllotjamentOperatiu(){
         // Creem un allotjament no operatiu i l'afegim a l'accés
-        Parcela parcela = new Parcela("Parcela Test", "ALL1", 50.0f, true);
-        parcela.setOperatiu(false);
+        Parcela parcela = new Parcela("Parcela Test", "ALL1", false, "100%", 50.0f, true);
         camiAsfalt.afegirAllotjament(parcela);
         llista.afegirAcces(camiAsfalt);
 
@@ -98,6 +97,7 @@ public class LlistaAccessosTest {
     void testCalculMetresTerra(){
         llista.afegirAcces(camiTerra); // Longitud = 100
         llista.afegirAcces(carreteraTerra); // Longitud = 200
+        assertEquals(300, llista.calculaMetresTerra(), 0.01);
     }
 
     @Test

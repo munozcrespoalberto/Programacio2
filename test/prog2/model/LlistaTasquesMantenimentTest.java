@@ -30,12 +30,12 @@ public class LlistaTasquesMantenimentTest {
     @Test
     void testAfegirTascaNeteja() throws ExcepcioCamping{
         llista.afegirTascaManteniment(1, "Neteja", parcela, "2025-03-30", 2);
-        assertEquals("100", parcela.getIluminacio()); // Neteja = 100%
+        assertEquals("100%", parcela.getIluminacio()); // Neteja = 100%
     }
 
     @Test
     void testAfegirTascaRevisioTecnica() throws ExcepcioCamping{
-        llista.afegirTascaManteniment(1, "RevisioTecnica", parcela, "20225-03-30", 2);
+        llista.afegirTascaManteniment(1, "RevisioTecnica", parcela, "2025-03-30", 2);
         assertEquals("50%", parcela.getIluminacio()); // Revisio = 50%
     }
 

@@ -64,7 +64,7 @@ public class LlistaAllotjamentsTest {
     }
 
     @Test
-    void testContainsAllotjamentOperati(){
+    void testContainsAllotjamentOperatiu(){
         llista.afegirAllotjament(parcela1);
         assertTrue(llista.containsAllotjamentOperatiu());
 
@@ -73,14 +73,14 @@ public class LlistaAllotjamentsTest {
     }
 
     @Test
-    void testContaind(){
+    void testContains(){
         llista.afegirAllotjament(parcela1);
         assertTrue(llista.contains(parcela1));
         assertFalse(llista.contains(parcela2));
     }
 
     @Test
-    void testGeetAllotjament() throws ExcepcioCamping{
+    void testGetAllotjament() throws ExcepcioCamping{
         llista.afegirAllotjament(parcela1);
         assertEquals(parcela1, llista.getAllotjament("ALL1"));
     }
