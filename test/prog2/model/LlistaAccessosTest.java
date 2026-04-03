@@ -104,7 +104,7 @@ public class LlistaAccessosTest {
     void testCalclaMetresTerraNomesAccesosAsfalt(){
         llista.afegirAcces(camiAsfalt);
         llista.afegirAcces(carreteraAsfalt);
-        assertEquals(0, llista.calculaMetresTerra());
+        assertThrows(ExcepcioCamping.class, () -> llista.calculaMetresTerra());
     }
 
 

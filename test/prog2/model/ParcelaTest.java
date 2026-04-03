@@ -26,8 +26,8 @@ class ParcelaTest {
         assertTrue(p.isConnexioElectrica());
         assertTrue(p.isOperatiu());         // per defecte operatiu
         assertEquals("100%", p.getIluminacio()); // per defecte 100%
-        String expected = "Nom=Parcela A, Id=P001, estada mínima en temp ALTA: 4, estada mínima en temp BAIXA: 2.";
-        assertTrue(parcela.toString().contains(expected));
+        String expected = "Nom=Parcela A, Id=P001, estada mínima en temp ALTA: 4, estada mínima en temp BAIXA: 2, Operatiu: Sí, Iluminacio: 100%.";
+        assertTrue(p.toString().contains(expected));
     }
 
     // test get i set Nom
@@ -79,7 +79,7 @@ class ParcelaTest {
 
     @Test
     void testToString() {
-        String expected = "Nom=Parcela A, Id=P001, estada mínima en temp ALTA: 4, estada mínima en temp BAIXA: 2.";
+        String expected = "Nom=Parcela A, Id=P001, estada mínima en temp ALTA: 4, estada mínima en temp BAIXA: 2, Operatiu: Sí, Iluminacio: 100%.";
         assertTrue(parcela.toString().contains(expected));
     }
 }
