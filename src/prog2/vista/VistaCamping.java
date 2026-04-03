@@ -2,16 +2,34 @@ package prog2.vista;
 import prog2.model.Camping;
 import java.util.Scanner;
 
+/**
+ * Classe encarregada de la interfície d'usuari.
+ * Mostra un menú textual i gestiona la interacció amb l'usuari.
+ *
+ * @author Alberto
+ * @author Marti
+ */
 public class VistaCamping {
     private Camping camping;
     private String nomCamping;
 
+
+    /**
+     * Constructor de la vista. Inicialitza el càmping i carrega les dades inicials.
+     *
+     * @param nomCamping Nom del càmping.
+     */
     public VistaCamping(String nomCamping) {
         this.nomCamping = nomCamping;
         this.camping = new Camping(nomCamping);
         this.camping.inicialitzaDadesCamping();
     }
 
+    /**
+     * Gestiona el bucle principal del menú.
+     * Mostra les opcions, llegeix l'opció de l'usuari i crida els mètodes corresponents
+     * de la classe Camping.
+     */
     public void gestioCamping() {
         Scanner sc = new Scanner(System.in);
 

@@ -5,13 +5,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class LlistaTasquesManteniment implements InLlistaTasquesManteniment, Serializable { // Serializable es per poder utilitzar ObjectOutputStream...
+/**
+ * Aquesta classe que gestiona la llista de tasques de manteniment del camping permetent afegir,
+ * completar i llistar tasques.
+ * També ens ajuda a no tenir més d'una tasca activa a la vegada.
+ *
+ * @author Marti
+  */
 
-    /*
-    * Aquesta classe que gestiona la llista de tasques de manteniment del camping permetent afegir,
-    * completar i llistar tasques.
-    * També ens ajuda a no tenir més d'una tasca activa a la vegada.
-    * */
+public class LlistaTasquesManteniment implements InLlistaTasquesManteniment, Serializable { // Serializable es per poder utilitzar ObjectOutputStream...
 
     private ArrayList<TascaManteniment> tasques;
 
@@ -20,7 +22,18 @@ public class LlistaTasquesManteniment implements InLlistaTasquesManteniment, Ser
         this.tasques = new ArrayList<>();
     }
 
-    // Comprova si el allotjament ja te una tasca activa o si la nova tasca a asignar es valida. Si tot esta bé crea una nova tasca i la afegeix a la llista
+    /**
+     * Afegeix una nova tasca de manteniment.
+     * Comprova que l'allotjament no tingui ja una tasca activa.
+     * Quan s'afegeix la tasca, l'allotjament es tanca automàticament.
+     *
+     * @param num        Número identificador de la tasca.
+     * @param tipus      Tipus de tasca (String).
+     * @param allotjament Allotjament afectat.
+     * @param data       Data de registre.
+     * @param dies       Dies previstos per completar-la.
+     * @throws ExcepcioCamping Si l'allotjament ja té tasca o el tipus no és vàlid.
+     */
     @Override
     public void afegirTascaManteniment(int num, String tipus, Allotjament allotjament, String data, int dies) throws ExcepcioCamping {
 
@@ -50,7 +63,13 @@ public class LlistaTasquesManteniment implements InLlistaTasquesManteniment, Ser
 
     }
 
-    // Completa una tasca de manteniment i obre l'allotjament
+    /**
+     * Completa una tasca de manteniment.
+     * L'elimina de la llista i obre l'allotjament corresponent.
+     *
+     * @param tasca Tasca a completar.
+     * @throws ExcepcioCamping Si la tasca no existeix a la llista.
+     */
     @Override
     public void completarTascaManteniment(TascaManteniment tasca) throws ExcepcioCamping {
 
@@ -67,7 +86,12 @@ public class LlistaTasquesManteniment implements InLlistaTasquesManteniment, Ser
 
     }
 
-    // Retorna un Strinb amb l'informació de les tasques actives
+    /**
+     * Retorna un String amb totes les tasques actives.
+     *
+     * @return String amb la informació de les tasques.
+     * @throws ExcepcioCamping Si no hi ha cap tasca activa.
+     */
     @Override
     public String llistarTasquesManteniment() throws ExcepcioCamping {
 
@@ -83,7 +107,13 @@ public class LlistaTasquesManteniment implements InLlistaTasquesManteniment, Ser
         return resultat.toString();
     }
 
-    // Busca i retorna la tasca amb el número identificador donat
+    /**
+     * Cerca una tasca pel seu número identificador.
+     *
+     * @param num Número de la tasca.
+     * @return La tasca trobada.
+     * @throws ExcepcioCamping Si no existeix ninguna tasca amb aquest número.
+     */
     @Override
     public TascaManteniment getTascaManteniment(int num) throws ExcepcioCamping {
 

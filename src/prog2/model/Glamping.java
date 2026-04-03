@@ -2,6 +2,13 @@ package prog2.model;
 
 import java.io.Serializable;
 
+/**
+ * Classe que representa un glamping del càmping.
+ * Un glamping és una tenda de luxe que pot ser de tela o fusta i pot tenir casa per a mascotes.
+ *
+ * @author Alberto
+ */
+
 public class Glamping extends Casa implements Serializable {
     private String material;
     private boolean casaMascota;

@@ -2,6 +2,12 @@ package prog2.model;
 
 import java.io.Serializable;
 
+/**
+ * Classe que representa una carretera de terra.
+ * Les carreteres de terra permeten l'accés amb vehicle i tenen una amplada.
+ *
+ * @author Alberto
+ */
 public class CarreteraTerra extends AccesTerra implements Serializable {
     int amplada;
 

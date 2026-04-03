@@ -2,11 +2,35 @@ package prog2.model;
 
 import java.io.Serializable;
 
+/**
+ * Classe que representa un bungalow del càmping.
+ * Un bungalow té places de pàrquing, terrassa, televisió i aire fred.
+ *
+ * @author Marti
+ */
+
 public class Bungalow extends Casa implements Serializable {
     private int placesParquing;
     private boolean terrassa;
     private boolean tv;
     private boolean aireFred;
+
+
+    /**
+     * Constructor de la classe Bungalow.
+     *
+     * @param nom            Nom del bungalow.
+     * @param id             Identificador únic.
+     * @param mida           Mida ("Petita", "Mitjana" o "Gran").
+     * @param habitacions    Nombre d'habitacions.
+     * @param placesPersones Nombre màxim de persones.
+     * @param placesParquing Places de pàrquing disponibles.
+     * @param terrassa       True si té terrassa, false altrament.
+     * @param tv             True si té televisió, false altrament.
+     * @param aireFred       True si té aire condicionat, false altrament.
+     * @param estadaMinimaAlta  Dies mínims en temporada alta.
+     * @param estadaMinimaBaixa Dies mínims en temporada baixa.
+     */
 
     public Bungalow(String nom, String id, String mida, int habitacions, int placesPersones, int placesParquing, boolean terrassa, boolean tv, boolean aireFred, long estadaMinimaAlta, long estadaMinimaBaixa) {
         super(nom, id, estadaMinimaAlta, estadaMinimaBaixa, mida, habitacions, placesPersones);
@@ -36,6 +60,11 @@ public class Bungalow extends Casa implements Serializable {
         this.aireFred = aireFred;
     }
 
+    /**
+     * Retorna una representació textual del bungalow.
+     *
+     * @return String amb tota la informació del bungalow.
+     */
 
     @Override
     public String toString() {

@@ -1,12 +1,27 @@
 package prog2.model;
 import java.io.Serializable;
 
+/**
+ * Classe que representa una parcel·la del càmping.
+ * Una parcel·la té una mida en metres quadrats i pot tenir connexió elèctrica.
+ *
+ * @author Marti
+ */
 public class Parcela extends Allotjament implements Serializable {
 
     private float mida;
     private boolean electricitat;
 
-    // Constructor, Allotjament inicialitza l'iluminacio i operatiu
+    /**
+     * Constructor principal de la parcel·la.
+     * Crea una parcel·la amb nom, id, mida i connexió elèctrica.
+     * L'estat operatiu i la il·luminació s'inicialitzen al constructor d'Allotjament.
+     *
+     * @param nom            Nom de la parcel·la.
+     * @param id             Identificador únic.
+     * @param mida           Mida en metres quadrats.
+     * @param electricitat   True si té connexió elèctrica, false altrament.
+     */
     public Parcela(String nom, String id, float mida, boolean electricitat) {
         super(nom, id, 4, 2);
         this.mida = mida;
@@ -14,7 +29,17 @@ public class Parcela extends Allotjament implements Serializable {
         // operatiu = true i iluminacio = 100%. Aquestos s'inicialitzen al constructor d'Allotjament
     }
 
-    // Constructor de 6 paràmetres per als tests
+    /**
+     * Constructor addicional per als tests.
+     * Permet crear una parcel·la especificant també l'estat operatiu i la il·luminació.
+     *
+     * @param nom          Nom de la parcel·la.
+     * @param id           Identificador únic.
+     * @param operatiu     Estat operatiu (true = operatiu, false = no operatiu).
+     * @param iluminacio   Percentatge d'il·luminació ("100%", "50%" o "0%").
+     * @param mida         Mida en metres quadrats.
+     * @param electricitat True si té connexió elèctrica.
+     */
     public Parcela(String nom, String id, boolean operatiu, String iluminacio, float mida, boolean electricitat) {
         super(nom, id, 4, 2); // estades mínimes per defecte
         this.mida = mida;

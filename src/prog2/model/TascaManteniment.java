@@ -1,5 +1,12 @@
 package prog2.model;
 import java.io.Serializable;
+
+/**
+ * Representa una tasca de manteniment associada a un allotjament.
+ * Cada tasca té un número únic, un tipus, una data i una durada prevista.
+ *
+ * @author Marti
+ */
 public class TascaManteniment implements InTascaManteniment, Serializable {
 
     // Enum amb els tipus de tasques
@@ -15,6 +22,16 @@ public class TascaManteniment implements InTascaManteniment, Serializable {
     private Allotjament allotjament;
     private String data;
     private int dies;
+
+    /**
+     * Constructor de la tasca de manteniment.
+     *
+     * @param num        Número identificador únic.
+     * @param tipus      Tipus de tasca (Reparacio, Neteja, etc.).
+     * @param allotjament Allotjament on s'ha de fer la tasca.
+     * @param data       Data de registre.
+     * @param dies       Dies previstos per completar la tasca.
+     */
 
     public TascaManteniment(int num, TipusTascaManteniment tipus, Allotjament allotjament, String data,
     int dies){
@@ -77,6 +94,13 @@ public class TascaManteniment implements InTascaManteniment, Serializable {
         this.dies = dies;
     }
 
+
+    /**
+     * Retorna el percentatge d'il·luminació que ha de tenir l'allotjament
+     * segons el tipus de tasca.
+     *
+     * @return "50%" per Reparacio i RevisioTecnica, "100%" per Neteja, "0%" per Desinfeccio.
+     */
     @Override
     public String getIluminacioAllotjament() {
         switch(tipus){

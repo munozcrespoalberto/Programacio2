@@ -1,8 +1,15 @@
 package prog2.vista;
-//Preguntar deepseek como hacer
+/**
+ * Utilitzem aquesta classe per obtenir excepcions personalitzades
+ * per a errors relacionats amb el càmping
+ *
+ * @author Alberto
+ */
 public class ExcepcioCamping extends RuntimeException {
-    /*
-    Utilitzem això per obtenir excepcions personalitzades pel camping
+    /**
+     * Constructor de l'excepció.
+     *
+     * @param message Missatge descriptiu de l'error.
      */
     public ExcepcioCamping(String message) {
         super(message);

@@ -1,6 +1,12 @@
 package prog2.model;
 
 import java.io.Serializable;
+/**
+ * Classe que representa un camí de terra.
+ * Els camins de terra NO permeten l'accés amb vehicle.
+ *
+ * @author Alberto
+ */
 
 public class CamiTerra extends AccesTerra implements Serializable {
     // Constructor amb estat donat

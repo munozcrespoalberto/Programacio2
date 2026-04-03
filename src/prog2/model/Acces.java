@@ -1,5 +1,12 @@
 package prog2.model;
 import java.io.Serializable;
+
+/**
+ * Classe abstracta que representa un camí o carretera dins del càmping.
+ * Conté el nom, l'estat i la llista d'allotjaments als quals dona accés.
+ *
+ * @author Marti
+ */
 public abstract class Acces implements InAcces, Serializable{
 
     // Atributs de tots els tipus d'accesos
@@ -27,7 +34,13 @@ public abstract class Acces implements InAcces, Serializable{
         return nom;
     }
 
-    // Mètode abstracte cada subclasse implementa la seva accesssibilitat
+    /**
+     * Determina si l'accés permet el pas de vehicles.
+     * Aquest mètode és abstracte perquè cada tipus d'accés (camí, carretera, etc.)
+     * té el seu propi comportament.
+     *
+     * @return true si permet vehicles, false en cas contrari.
+     */
     @Override
     public abstract boolean isAccessibilitat();
 

@@ -1,5 +1,14 @@
 package prog2.model;
 import java.io.Serializable;
+
+/**
+ * Classe abstracta que representa un allotjament genèric del càmping.
+ * Conté els atributs i comportaments comuns a tots els allotjaments:
+ * identificador, nom, estades mínimes segons temporada, estat operatiu i il·luminació.
+ *
+ * @author Marti
+ */
+
 public abstract class Allotjament implements InAllotjament, Serializable {
 
     private String nom;
@@ -11,7 +20,16 @@ public abstract class Allotjament implements InAllotjament, Serializable {
     private boolean operatiu;
     private String iluminacio;
 
-    // Constructor de Allotjament
+    /**
+     * Constructor de la classe Allotjament.
+     * Inicialitza l'allotjament amb nom, id i estades mínimes.
+     * Per defecte, l'allotjament esta operatiu i amb il·luminació al 100%.
+     *
+     * @param nom               Nom de l'allotjament.
+     * @param id                Identificador únic.
+     * @param estadaMinimaAlta  Dies mínims en temporada alta.
+     * @param estadaMinimaBaixa Dies mínims en temporada baixa.
+     */
     public Allotjament(String nom, String id, long estadaMinimaAlta, long estadaMinimaBaixa){
         this.nom = nom;
         this.id = id;
@@ -77,6 +95,13 @@ public abstract class Allotjament implements InAllotjament, Serializable {
         return iluminacio;
     }
 
+
+    /**
+     * Deixa l'allotjament  no operatiu a causa d'una tasca de manteniment.
+     * La il·luminació s'actualitza segons el tipus de tasca.
+     *
+     * @param tasca Tasca de manteniment que provoca el tancament.
+     */
     @Override
     public void tancarAllotjament(TascaManteniment tasca){
         // Deixa d'estar operatiu
@@ -84,6 +109,10 @@ public abstract class Allotjament implements InAllotjament, Serializable {
         // Iluminacio depen del tipus de tasca
         this.iluminacio = tasca.getIluminacioAllotjament();
     }
+
+    /**
+     * El torna operatiu i restaura la il·luminació al 100%.
+     */
     @Override
     public void obrirAllotjament(){
         // Torna a estar operatiu
@@ -91,8 +120,11 @@ public abstract class Allotjament implements InAllotjament, Serializable {
         // Torna la iluminacio al 100%
         this.iluminacio = "100%";
     }
-
-    // Retornem els valors que hem guardat en forma de string
+    /**
+     * Retorna una representació textual de l'allotjament.
+     *
+     * @return String amb nom, id, estades mínimes, estat operatiu i il·luminació.
+    */
     @Override
     public String toString() {
         return "Nom=" + this.nom + ", Id=" + this.id +

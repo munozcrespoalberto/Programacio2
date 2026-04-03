@@ -8,13 +8,24 @@ import java.util.Iterator;
 import prog2.vista.ExcepcioCamping;
 import java.io.Serializable;
 
+/**
+ * Classe principal del model. Gestiona allotjaments, accessos i tasques de manteniment.
+ * També permet guardar i carregar l'estat del càmping en fitxers.
+ *
+ * @author Alberto
+ */
 public class Camping implements InCamping, Serializable {
     private String nom;
     private LlistaAllotjaments allotjaments;
     private LlistaAccessos accessos;
     private LlistaTasquesManteniment tasques;
 
-    // Constructor de camping, només nom i inicialitzar llistes
+    /**
+     * Constructor de la classe Camping.
+     * Inicialitza les llistes d'allotjaments, accessos i tasques de manteniment.
+     *
+     * @param nom Nom del càmping.
+     */
     public Camping(String nom) {
         this.nom = nom;
         this.allotjaments = new LlistaAllotjaments();
@@ -58,7 +69,19 @@ public class Camping implements InCamping, Serializable {
         return tasques.llistarTasquesManteniment();
     }
 
-    // Primer agafa l'allotjament amb l'id donat, si no hi ha llança excepció. Després d'agafar l'allotjament, li afegeix una tasca de manteniment
+
+    /**
+     * Afegeix una nova tasca de manteniment a un allotjament.
+     * Si l'allotjament ja té una tasca activa, llança una excepció.
+     * Després d'afegir la tasca, actualitza automàticament l'estat dels accessos.
+     *
+     * @param num           Número identificador de la tasca.
+     * @param tipus         Tipus de tasca (Reparacio, Neteja, etc.).
+     * @param idAllotjament Identificador de l'allotjament afectat.
+     * @param data          Data de la tasca.
+     * @param dies          Dies previstos per completar-la.
+     * @throws ExcepcioCamping Si l'allotjament no existeix o ja té tasca activa.
+     */
     @Override
     public void afegirTascaManteniment(int num, String tipus, String idAllotjament, String data, int dies) throws ExcepcioCamping {
         Allotjament allotjament = allotjaments.getAllotjament(idAllotjament);
@@ -93,7 +116,12 @@ public class Camping implements InCamping, Serializable {
         }
     }
 
-    // Guarda l'objecte Camping complert en un arxiu utilitzant ObjectOutputStream.
+    /**
+     * Guarda l'estat actual del càmping en un fitxer.
+     *
+     * @param camiDesti Ruta del fitxer on es vol guardar.
+     * @throws ExcepcioCamping Si hi ha algun error d'entrada/sortida.
+     */
     public void save(String camiDesti) throws ExcepcioCamping {
         // try-with-resources = tanca automaticament els arxius al final del try catch.
         // ObjectOutputStream = escriure al fitxer
@@ -104,7 +132,13 @@ public class Camping implements InCamping, Serializable {
         }
     }
 
-    // Load es com un getCamping pero totes les dades del camping han passat per un arxiu quan feiem el save.
+    /**
+     * Carrega un càmping des d'un fitxer prèviament guardat.
+     *
+     * @param camiOrigen Ruta del fitxer des d'on es vol carregar.
+     * @return Una nova instància de Camping amb les dades recuperades.
+     * @throws ExcepcioCamping Si el fitxer no existeix o està corrupte.
+     */
     public static Camping load(String camiOrigen) throws ExcepcioCamping {
         // ObjectInputStream = llegir el fitxer
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(camiOrigen))) {
