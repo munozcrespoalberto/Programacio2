@@ -8,7 +8,7 @@ import java.util.Iterator;
  * Classe que gestiona una llista d'allotjaments.
  * Permet afegir, eliminar, buscar i llistar allotjaments segons el seu estat.
  *
- * @author Marti
+ * @author Alberto
  */
 public class LlistaAllotjaments implements InLlistaAllotjaments, Serializable {
     private ArrayList<Allotjament> allotjaments;
